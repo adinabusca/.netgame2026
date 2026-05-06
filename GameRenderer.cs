@@ -22,13 +22,16 @@ public unsafe class GameRenderer {
  }
 
  public int LoadTexture(string file, out TextureData data){
+   //load image using SixLabors.ImageSharp
     using var img = Image.Load<Rgba32>(file);
 
     data = new TextureData{Width = img.Width, Height = img.Height};
-
+    
+    //convert image pixels to a raw byte array rgba
     byte[] raw = new byte[data.Width * data.Height * 4];
     img.CopyPixelDataTo(raw);
 
+    //pin memory to create SDL Surface from the raw pixel data
     fixed (byte* ptr = raw){
         var surf = _sdl.CreateRGBSurfaceWithFormatFrom(ptr, data.Width, data.Height, 32, data.Width * 4, (uint)PixelFormatEnum.Rgba32);
 
@@ -39,7 +42,8 @@ public unsafe class GameRenderer {
         return _id++;
     }
  }
-
+ 
+ //draws portion of texture to specific area on screen
  public void RenderTexture(int id, Rectangle<int> src, Rectangle<int> dst){
     if (_textures.TryGetValue(id,out var tex)){
         _sdl.RenderCopy(_renderer,(Texture*)tex, in src, in dst);
@@ -52,8 +56,8 @@ public unsafe class GameRenderer {
 
  public (int Width, int Height) GetWindowSize() => _window.Size;
 
- public void Clear() => _sdl.RenderClear(_renderer);
- public void Present() => _sdl.RenderPresent(_renderer);
+ public void Clear() => _sdl.RenderClear(_renderer);//clears screen buffer for next frame
+ public void Present() => _sdl.RenderPresent(_renderer);//swaps buffers to dsiplay the renderd frame on monitor
 
 
 

@@ -8,7 +8,8 @@ public class GameWindow{
 
     public GameWindow(Sdl sdl){
         _sdl = sdl;
-
+        
+        //creates windows using SDL_CreateWindow
         unsafe {
             _window = (IntPtr)sdl.CreateWindow(
                 "Hunting the Wren",
@@ -16,10 +17,11 @@ public class GameWindow{
                 Sdl.WindowposUndefined,
                 800,
                 450,
-                (uint)WindowFlags.Resizable
+                (uint)WindowFlags.Resizable//allows user to resize window
             );
         }
-
+        
+        //checks if initialization failed
         if (_window == IntPtr.Zero){
             throw new Exception("Creating window failed.");
         }
