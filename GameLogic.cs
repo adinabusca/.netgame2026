@@ -17,6 +17,10 @@ public class GameLogic{
     private bool _gameOver = false;
     private int _groundY;
 
+    private double _timeRemaining = 60_000;
+    private bool _won = false;
+    private bool _hurryUpShown = false;
+
     public GameLogic(GameRenderer renderer){
         _renderer = renderer;
     }
@@ -36,17 +40,34 @@ public class GameLogic{
     }
 
     public void Update(bool left, bool right, bool jump, double deltaTime){
-        if (_gameOver) return;
+        if (!_gameOver){
 
-        //update entities state
-        _fox.Update(left,right,jump,deltaTime);
-        _bird.Update(deltaTime);
+            //update entities state
+            _fox.Update(left,right,jump,deltaTime);
+           
+           //update timer
+           _timeRemaining -= deltaTime;
 
-        //collision detection: check if player touches bird
-        if (Collides(_fox.Dest,_bird.Dest)){
+           if (!_hurryUpShown && _timeRemaining <= 30_000){
+            _hurryUpShown = true;
+            Console.WriteLine("Hurry up!");
+           }
+           if (_timeRemaining <= 0){
+            _timeRemaining = 0;
             _gameOver = true;
-            Console.WriteLine("Game over! You caught the wren.");
+             Console.WriteLine("You ran out of time! You did not caught the wren.");
+           }
+
+            //collision detection: check if player touches bird
+            if (Collides(_fox.Dest,_bird.Dest)){
+                _bird.Kill();
+                _won = true;
+                _gameOver = true;
+                Console.WriteLine("Game over! You caught the wren.");
+            }
         }
+
+        _bird.Update(deltaTime);
 
     }
 
