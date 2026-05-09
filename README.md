@@ -1,6 +1,7 @@
 # Hunting the Wren - 2D Game Implementation
 
 A 2D game project developed in **C#** using the **Silk.NET** library. The game features a player-controlled fox attempting to catch an automated bird NPC.
+ <img width="802" height="452" alt="Screenshot (253)" src="https://github.com/user-attachments/assets/5f27869d-a3be-4005-b9a2-14d423da6060" />
 
 ### Core Mechanics:
 *   **The Hunt:** The player (Fox) must time jumps and movement to collide with the NPC (Bird).
