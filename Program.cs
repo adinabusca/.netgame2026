@@ -23,5 +23,6 @@ while (!quit){
     System.Threading.Thread.Sleep(13);// frame rate control (pauses execution slightly)
 }
 
+renderer.Dispose();
 //cleanup (shutdown SDL and release hardware resources before exit)
 sdl.Quit();

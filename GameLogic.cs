@@ -18,8 +18,9 @@ public class GameLogic{
     private int _groundY;
 
     private double _timeRemaining = 60_000;
-    private bool _won = false;
     private bool _hurryUpShown = false;
+
+    private int _wins = 0;
 
     public GameLogic(GameRenderer renderer){
         _renderer = renderer;
@@ -37,6 +38,9 @@ public class GameLogic{
        //create player and NPC instances
         _fox = new PlayerObject(_renderer, _groundY);
         _bird = new BirdObject(_renderer);
+
+        _wins = SaveManager.LoadWins();
+        Console.WriteLine($"Total wins (so far) loaded: {_wins}");
     }
 
     public void Update(bool left, bool right, bool jump, double deltaTime){
@@ -61,9 +65,14 @@ public class GameLogic{
             //collision detection: check if player touches bird
             if (Collides(_fox.Dest,_bird.Dest)){
                 _bird.Kill();
-                _won = true;
                 _gameOver = true;
+
+                _wins++;
+
+                SaveManager.SaveWins(_wins);
+
                 Console.WriteLine("Game over! You caught the wren.");
+                Console.WriteLine($"Total wins: {_wins}");
             }
         }
 
@@ -89,9 +98,11 @@ public class GameLogic{
     }
 
     //checks if two rectanles overlap in 2D space 
+    //AI-generated
     private bool Collides(Rectangle<int> a, Rectangle<int> b){
         return a.Origin.X < b.Origin.X + b.Size.X && a.Origin.X + a.Size.X > b.Origin.X && a.Origin.Y < b.Origin.Y + b.Size.Y && a.Origin.Y + a.Size.Y > b.Origin.Y;
     }
+    //end AI-generated
 
    
        

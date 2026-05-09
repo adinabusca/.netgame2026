@@ -7,7 +7,7 @@ using TheAdventure;
 using TheAdventure.Models;
 
 
-public unsafe class GameRenderer {
+public unsafe class GameRenderer: IDisposable {
  private Sdl _sdl;
  private Renderer* _renderer;
  private GameWindow _window;
@@ -54,12 +54,20 @@ public unsafe class GameRenderer {
     RenderTexture(id,src,dst);
  }
 
+ 
+
  public (int Width, int Height) GetWindowSize() => _window.Size;
 
  public void Clear() => _sdl.RenderClear(_renderer);//clears screen buffer for next frame
  public void Present() => _sdl.RenderPresent(_renderer);//swaps buffers to dsiplay the renderd frame on monitor
 
+ public unsafe void Dispose(){
+   foreach( var tex in _textures.Values){
+      _sdl.DestroyTexture((Texture*)tex);
+   }
 
+   _textures.Clear();
+ }
 
 
 

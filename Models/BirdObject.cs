@@ -3,7 +3,7 @@ using Silk.NET.Maths;
 namespace TheAdventure.Models;
 
 //automated bird NPC
-public class BirdObject: AnimatedGameObject {
+public class BirdObject: AnimatedGameObject, IUpdatable {
     public int X;
     public int Y;
 

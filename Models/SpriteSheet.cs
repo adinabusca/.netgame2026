@@ -19,6 +19,7 @@ public class SpriteSheet {
         _frameHeight = texH / r;
     }
 
+    //AI-generated
     // f- frame index, r - row index 
     public Rectangle<int> GetFrame(int f, int r){
         int col = f % _columns;
@@ -27,6 +28,7 @@ public class SpriteSheet {
         return new Rectangle<int>(col*_frameWidth, r * _frameHeight, _frameWidth, _frameHeight);
 
     }
+    //end AI-generated
     
     //properties used by GameRenderer to access frame dimensions
     public int FrameWidth => _frameWidth;

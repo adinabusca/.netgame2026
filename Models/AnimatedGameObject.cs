@@ -15,6 +15,7 @@ public class AnimatedGameObject: RenderableGameObject {
         _sheet = new SpriteSheet(_texData.Width, _texData.Height,_frames, 1);
     }
 
+    //AI-generated
     //updates animation based on time since last update  with the speed being the duration each frame stays on screen
     public void UpdateAnimation(double deltaTime, double speed = 100){
         _time += deltaTime;
@@ -27,6 +28,7 @@ public class AnimatedGameObject: RenderableGameObject {
             _time = 0;
         }
     }
+    //end AI-generated
 
     public override void Render(){
         _renderer.RenderTexture(_texture, _sheet.GetFrame(_frame,0), Dest);
