@@ -4,12 +4,12 @@ This project was developed with limited AI tools usage mainly for debugging and 
 
 ## Tools Used
 -**ChatGPT (GPT-5.3-mini,free version)**
-  -Used for:
+  used for:
    - debugging assistance 
    - suggestions for code improvements
    
 -**Google Gemini (Gemini for Students, free version)**
-  -Used for:
+  used for:
    - clarification for some of the code provided in the labs
    - additional suggestions for code logic
    - rubber-ducking 
@@ -27,9 +27,9 @@ AI tools were used as learning and support assistants, not as primary code gener
 
 ### 3. AI-Assisted Implementations
 The following parts of the projects were created with the assistance of AI and then reviewed and understood by me:
--**Models\AnimatedGameObjects.cs** file : the UpdateAnimation(double deltaTime, double speed = 100) function
--**Models\SpriteSheet.cs** file: the GetFrame(int f, int r) function
--**GameLogic.cs** file: the Collides(Rectangle<int> a, Rectangle<int> b) function
+  - **Models\AnimatedGameObjects.cs** file : the UpdateAnimation(double deltaTime, double speed = 100) function
+  - **Models\SpriteSheet.cs** file: the GetFrame(int f, int r) function
+  - **GameLogic.cs** file: the Collides(Rectangle<int> a, Rectangle<int> b) function
 
 I understood how these work before integrating them into my project so that I can modify them if need be.
 
